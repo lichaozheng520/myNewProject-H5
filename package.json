@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "WEBPACK_ENV=dev webpack-dev-server --inline --port 8088",
     "dev_win": "set WEBPACk_ENV=dev && webpack-dev-server --inline --port 8088",
-    "dist": "WEBPACk_ENV=online webpack -p",
-    "dist_win": "set WEBPACk_ENV=online && webpack -p"
+    "dist": "WEBPACk_ENV=online webpack -d",
+    "dist_win": "set WEBPACk_ENV=online && webpack -d"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,9 @@
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.8.0"
+  },
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "hogan.js": "^3.0.2"
   }
 }
