@@ -29,7 +29,7 @@ require('./footer/index.css');
 
 #### 2、通用header开发
 
-在layout中创建header.html文件，如下：
+在layout中创建head.html文件，如下：
 
 <div class="header">
   <div class="w">
@@ -157,11 +157,6 @@ module.exports = navSide;
 .nav-side .nav-item.active .link{
   color: #C60023;
 }
-/*右侧内容区*/
-.content.with-nav{
-  float: left;
-  width: 950px;
-}
 
 ====================================
 
@@ -179,8 +174,6 @@ var navSide = require('@/common/nav-side/index.js');
 
 ====================================
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
 再完成初始化的逻辑，如下：
 
 ![](https://tva1.sinaimg.cn/large/006y8mN6gy1g79cfwl4ytj31660bowf8.jpg)
@@ -189,9 +182,11 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 ![](https://tva1.sinaimg.cn/large/006y8mN6gy1g79chhof36j31cg0rk40t.jpg)
 
-在common/nav-side目录下新建一个index.string的模板文件
+在common/nav-side目录下新建一个index.string的模板文件，将index.string文件引入到common/nav-side/index.js文件中使用，如下：
 
-把下面的这个结构【剪切】到index.string中，如下：
+var templateIndex = require('./index.string');
+
+然后我们完善这个templateIndex模板的内容，即把下面的这个结构【剪切】到index.string中，如下：
 
 <!--下面是静态渲染，当动态渲染的时候会将渲染的内容放到ul容器中-->
   <li class="nav-item">
@@ -204,13 +199,15 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     <a class="link" href="">关于TMALL</a>
   </li>
 
-同时我们要用循环来实现渲染多条数据，所以我们只保留一条数据即可，如下：
+同时我们要用循环来实现渲染多条数据，所以我们只保留一条数据即可，
+
+修改如下：
 
 <li class="nav-item">
     <a class="link" href="">个人中心</a>
 </li>
 
-接着将它改成如下的形式：
+接着将它按需求改成如下的形式：
 
 ![](https://tva1.sinaimg.cn/large/006y8mN6gy1g79csv2vtbj316y0dqdg9.jpg)
 
@@ -254,7 +251,7 @@ new HtmlWebpackPlugin(getHtmlConfig('user-result', '操作结果')),
 
 重启服务，再去src/page目录下创建user-result目录，并创建index.css和index.js文件，再在view目录下创建
 
-user-index.html文件。可以去index.html文件中拷贝基础模板
+user-result.html文件。可以去index.html文件中拷贝基础模板
 
 <!DOCTYPE html>
 <html lang="en">
@@ -262,7 +259,6 @@ user-index.html文件。可以去index.html文件中拷贝基础模板
      <%= require('html-loader!./layout/head-common.html') %>
      <title><%= htmlWebpackPlugin.options.title%> - storeTMall电商平台</title>
   </head>
-
 ================================
 
 <%= require('html-loader!./layout/footer.html') %>
@@ -293,11 +289,21 @@ sudo cnpm run  dev + 回车
 
 localhost:8088/dist/view/user-result.html + 回车
 
-================================================
+===============================================
 
 user-result.html文件初始内容如下：
 
 ![](https://tva1.sinaimg.cn/large/006y8mN6gy1g79eiqcg52j31e80iajs8.jpg)
+
+需要添加nav-simple最简导航组件：
+
+<%= require('html-loader!./layout/nav-simple.html')%>
+
+在page/user-result/index.js中导入：
+
+require('../common/nav-simple/index.js');
+
+===============================================
 
 注册成功提示页：
 
@@ -318,67 +324,32 @@ var _mm = require('util/mm.js');
 
 =============================================
 
-然后实现页面的逻辑，如下：
+然后去浏览器中测试如下：
 
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g79euj55ppj31960fyt9f.jpg)
+localhost:8080/dist/view/user-result.html + 回车
 
 =============================================
 
-然后去浏览器中模拟一个type，如下
+首先在user-result.html文件中添加默认的情况的HTML结构，如下：
 
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g7ags7d6pgj316q0b8t97.jpg)
 
+然后实现根据【参数】进行页面选择的逻辑，
 
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g7agrhk2gbj319a0ae3ys.jpg)
 
+=============================================
 
+最后去浏览器中模拟一个type，测试如下：
 
+localhost:8080/dist/view/user-result.html？type=register + 回车
 
+本阶段总结：
 
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g7ah94duknj30ug0fw3zr.jpg)
 
+=============================================
 
+🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+=============================================
