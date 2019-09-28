@@ -8,9 +8,9 @@ var _mm = require('util/mm.js');
 
 var navSide = require('@/common/nav-side/index.js');
 //测试个人中心页
-// navSide.init({
-// 	name: 'user-center'
-// });
+navSide.init({
+	name: 'user-center'
+});
 //测试我的订单页
 // navSide.init({
 //   name: 'order-list'
